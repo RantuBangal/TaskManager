@@ -28,140 +28,102 @@ To get started with the API, follow the instructions below.
 
 ### User Routes
 
-#### Register
+- **Register  POST http://localhost:8080/users/register**
+  - Description: Register a new user.
+  - Request Body:
+    ```json
+    {
+      "userName": "string",
+      "email": "string",
+      "pass": "string"
+    }
+    ```
+  - Response:
+    - `200 OK`: Registration Successful.
+    - `400 Bad Request`: Password Hashing failed.
+    - `500 Internal Server Error`: Internal Server Error.
 
-**Endpoint:** `POST http://localhost:8080/users/register`
+- **Login  POST http://localhost:8080/users/login**
+  - Description: Login with existing user credentials.
+  - Request Body:
+    ```json
+    {
+      "email": "string",
+      "pass": "string"
+    }
+    ```
+  - Response:
+    - `200 OK`: Login successful. Returns user details and JWT token.
+    - `400 Bad Request`: Password De-hashing Failed.
+    - `500 Internal Server Error`: Internal Server Error.
 
-**Description:** Register a new user.
-
-**Request Body:**
-- `userName` (string): User's username.
-- `email` (string): User's email.
-- `pass` (string): User's password.
-
-**Response:**
-- `200 OK`: Registration Successful.
-- `400 Bad Request`: Password Hashing Failed.
-- `500 Internal Server Error`: Internal Server Error.
-
-#### Login
-
-**Endpoint:** `POST http://localhost:8080/users/login`
-
-**Description:** Login with existing user credentials.
-
-**Request Body:**
-- `email` (string): User's email.
-- `pass` (string): User's password.
-
-**Response:**
-- `200 OK`: Login successful. Returns user details and JWT token.
-- `400 Bad Request`: Password De-hashing Failed.
-- `500 Internal Server Error`: Internal server error.
-
-#### Logout
-
-**Endpoint:** `POST http://localhost:8080/users/logout`
-
-**Description:** Logout the user and blacklist the token.
-
-**Request Headers:**
-- `Authorization`: JWT token.
-
-**Response:**
-- `200 OK`: Logout successful.
-- `400 Bad Request`: Error occurred during logout.
-- `500 Internal Server Error`: Internal Server Error.
+- **Logout  POST http://localhost:8080/users/logout**
+  - Description: Logout the user and blacklist the token.
+  - Request Headers: JWT token.
+  - Response:
+    - `200 OK`: Logout successful.
+    - `400 Bad Request`: Error occurred during logout.
+    - `500 Internal Server Error`: Internal Server Error.
 
 ### Task Routes
 
-#### Get All Tasks
+- **Get All Tasks POST http://localhost:8080/tasks/**
+  - Description: Retrieve a list of all tasks for the authenticated user.
+  - Request Headers: JWT token.
+  - Response:
+    - `200 OK`: Returns tasks for the authenticated user.
+    - `500 Internal Server Error`: Internal Server Error.
 
-**Endpoint:** `GET http://localhost:8080/tasks/`
+- **GetTaskByID GET http://localhost:8080/tasks/:id**
+  - Description: Retrieve a single task by its ID for the authenticated user.
+  - Request Headers: JWT token.
+  - Request Parameters: "id": "string",
+  - Response:
+    - `200 OK`: Returns the task with the provided ID.
+    - `500 Internal Server Error`: Internal Server Error.
 
-**Description:** Retrieve a list of all tasks for the authenticated user.
+- **AddNewTask POST http://localhost:8080/tasks/add**
+  - Description: Add a new task for the authenticated user.
+  - Request Headers: JWT token.
+  - Request Body:
+    ```json
+    {
+      "title": "string",
+      "description": "string",
+      "dueDate": "Date",
+      "priority": "string",
+      "status": "string"
+    }
+    ```
+  - Response:
+    - `200 OK`: Task Added Successfully.
+    - `500 Internal Server Error`: Internal Server Error.
 
-**Request Headers:**
-- `Authorization`: JWT token.
 
-**Response:**
-- `200 OK`: Returns tasks for the authenticated user.
-- `500 Internal Server Error`: Internal Server Error.
+- **UpdateTask PATCH http://localhost:8080/tasks/update/:id**
+  - Description: Update an existing task by its ID for the authenticated user.
+  - Request Headers: JWT token.
+  - Request Body: (Fields to update)
+    ```json
+    {
+      "title": "string",
+      "description": "string",
+      "duedate": "Date",
+      "priority": "string",
+      "status": "string"
+    }
+    ```
+  - Response:
+    - `200 OK`: Task Updated Successfully.
+    - `500 Internal Server Error`: Internal Server Error.
 
-#### Get Task by ID
 
-**Endpoint:** `GET http://localhost:8080/tasks/:id`
-
-**Description:** Retrieve a single task by its ID for the authenticated user.
-
-**Request Parameters:**
-- `id` (string): Task ID.
-
-**Request Headers:**
-- `Authorization`: JWT token.
-
-**Response:**
-- `200 OK`: Returns the task with the provided ID.
-- `500 Internal Server Error`: Internal server error.
-
-#### Add New Task
-
-**Endpoint:** `POST http://localhost:8080/tasks/add`
-
-**Description:** Add a new task for the authenticated user.
-
-**Request Body:**
-- `title` (string): Task title.
-- `description` (string): Task description.
-- `dueDate` (Date): Task due date.
-- `priority` (string): Task priority.
-- `status` (string): Task status.
-
-**Request Headers:**
-- `Authorization`: JWT token.
-
-**Response:**
-- `200 OK`: Task Added Successfully.
-- `500 Internal Server Error`: Internal Server Error.
-
-#### Update Task
-
-**Endpoint:** `PATCH http://localhost:8080/tasks/update/:id`
-
-**Description:** Update an existing task by its ID for the authenticated user.
-
-**Request Parameters:**
-- `id` (string): Task ID.
-
-**Request Body:**
-- `title` (string): Task title.
-- `description` (string): Task description.
-- `dueDate` (Date): Task due date.
-- `priority` (string): Task priority.
-- `status` (string): Task status.
-
-**Request Headers:**
-- `Authorization`: JWT token.
-
-**Response:**
-- `200 OK`: Task Updated Successfully.
-- `500 Internal Server Error`: Internal Server Error.
-
-#### Delete Task
-
-**Endpoint:** `DELETE http://localhost:8080/tasks/delete/:id`
-
-**Description:** Delete an existing task by its ID for the authenticated user.
-
-**Request Parameters:**
-- `id` (string): Task ID.
-
-**Request Headers:**
-- `Authorization`: JWT token.
-
-**Response:**
-- `200 OK`: Task Deleted Successfully.
-- `500 Internal Server Error`: Internal Server Error.
+- **DELETE DELETE http://localhost:8080/tasks/delete/:id**
+  - Description: Delete an existing task by its ID for the authenticated user.
+  - Request Parameters: `id` (string)
+  - Response:
+    - `200 OK`: Task deleted successfully.
+    - `500 Internal Server Error`: Internal Server Error.
 
 ## Author
 
