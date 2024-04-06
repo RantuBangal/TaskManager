@@ -165,5 +165,5 @@ To get started with the API, follow the instructions below.
 
 ## Author
 
-- [Rantu Bangal](https://github.com/RantuBangal/RantuBangal.github.io)
+- [Rantu Bangal](https://github.com/RantuBangal)
   - Email: rantubangal996@gmail.com
