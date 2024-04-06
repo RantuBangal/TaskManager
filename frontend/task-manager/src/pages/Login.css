@@ -1,0 +1,10 @@
+.input {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.form > label {
+    font-weight: bold;
+    text-align: start;
+}
