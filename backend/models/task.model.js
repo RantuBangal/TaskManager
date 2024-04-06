@@ -28,7 +28,7 @@ const taskSchema = new mongoose.Schema({
         default: "pending" // Default status is set to "pending" if not provided
     },
     userId: {
-        type: String, // Assuming userId is referencing another collection
+        type: String,
         required: true
     }
 },{
